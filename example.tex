@@ -1,0 +1,584 @@
+\documentclass[glossy]{beamer}
+\useoutertheme{wuerzburg}
+\useinnertheme[realshadow,corners=2pt,padding=2pt]{chamfered}
+\usecolortheme{shark}
+\usepackage[utf8]{inputenc} % codificacao de caracteres
+\usepackage[T1]{fontenc}    % codificacao de fontes
+\usepackage[brazil]{babel}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage[absolute,overlay]{textpos}
+\usepackage{movie15}
+
+\usepackage{tikz}
+\newcommand<>{\hover}[1]{\uncover#2{%
+ \begin{tikzpicture}[remember picture,overlay]%
+ \draw[fill,opacity=0.4] (current page.south west)
+ rectangle (current page.north east);
+ \node at (current page.center) {#1};
+ \end{tikzpicture}}
+}
+
+\title{Banco de Dados NoSQL}
+\author{Igor Moraes, Lucas Fonseca, Marco Aurélio}
+\institute{Universidade Federal de Lavras}
+\date{5 de outubro de 2018}
+
+\begin{document}
+
+\begin{frame}
+\maketitle
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\begin{textblock*}{5cm}(9cm,7cm) % {block width} (coords)
+\includegraphics[scale=0.3]{no-sql.png}
+\end{textblock*}
+
+\end{frame}
+
+\section{Introdução Banco de Dados NoSQL}
+\section{Redes Sociais e Bancos de Dados NoSQL}
+\section{Características dos Banco de Dados NoSQL}
+\section{Por que usar Banco de Dados NoSQL?}
+\section{Modelos de Dados:}
+\subsection{Chave-Valor}
+\subsubsection{Redis}
+\subsection{Documento}
+\subsubsection{MongoDB}
+\subsection{Orientado à Coluna}
+\subsubsection{Cassandra}
+\subsection{Grafo}
+\subsubsection{Neo4J}
+\section{Comparativo dos Principais SGBD’s NoSQL}
+\section{Conclusão}
+\section{}
+
+\begin{frame}
+\frametitle{Introdução Banco de Dados NoSQL}
+\begin{itemize}
+    \item O termo foi usado inicialmente como nome de um banco de dados não relacional de código aberto.
+    \item É completamente distinto do modelo relacional e portanto deveria ser mais apropriadamente chamado "NoREL" ou algo que produzisse o mesmo efeito. 
+    \item Referência ao bancos de dados relacionais mais populares MySQL, Microsoft SQL Server, PostgreSQL.
+\end{itemize}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{nosql-1t.png}
+\end{figure} 
+\end{frame}
+
+\begin{frame}{Redes Sociais e Bancos de Dados NoSQL}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.35]{redes.png}
+\end{figure}    
+\end{frame}
+
+\begin{frame}
+\frametitle{Características dos Banco de Dados NoSQL}
+\begin{itemize}
+    \item Utilização do processamento paralelo para processamento das informações.
+    \item Distribuição em escala global.
+    \item Diversos tipos para diferentes aplicações.
+\end{itemize}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.35]{NoSQLS.png}
+\end{figure} 
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Por que usar Banco de Dados NoSQL?}
+\begin{itemize}
+    \item Flexibilidade
+    \item Escalabilidade
+    \item Disponibilidade
+    \item Raízes Open Source
+    \item Baixo Custo Operacional
+    \item Funcionalidades Especiais
+\end{itemize}
+
+\begin{textblock*}{5cm}(7cm,2cm) % {block width} (coords)
+    \includegraphics[scale=0.18]{scrum-logo.png}
+\end{textblock*}
+
+\begin{textblock*}{5cm}(7cm,4cm) % {block width} (coords)
+    \includegraphics[scale=0.22]{cluster.png}
+\end{textblock*} 
+
+\begin{textblock*}{5cm}(9.5cm,4cm) % {block width} (coords)
+    \includegraphics[scale=0.18]{247.png}
+\end{textblock*} 
+
+\begin{textblock*}{5cm}(6.7cm,6.2cm) % {block width} (coords)
+    \includegraphics[scale=0.14]{os.png}
+\end{textblock*}
+
+\begin{textblock*}{2cm}(9.5cm,6.2cm) % {block width} (coords)
+    1\includegraphics[scale=0.14]{lc.png}
+\end{textblock*}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Modelos de Dados NoSQL}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.69]{types.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Principais SGBD's do mercado devido à popularidade}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.3]{ranking.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chave-Valor}
+\begin{itemize}
+    \item Armazena dados como um conjunto de pares de chave-valor.
+    \item A chave funciona como um identificador exclusivo.
+    \item A chave e os valores podem ser desde objetos simples até objetos compostos complexos.
+    \item Principal SGBD: Redis.
+\end{itemize}
+\begin{textblock*}{5cm}(7.5cm,6cm) % {block width} (coords)
+    \includegraphics[scale=0.2]{key2.png}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Redis}
+\begin{itemize}
+    \item \textbf{RE}mote \textbf{DI}ctionary \textbf{S}erver
+    \item Criado por  Salvatore Sanfiippo;
+    \item Escrito na Linguagem C;
+    \item Open-source (Licença BSD);
+    \item Ideia de Hash/Dicionário em LP's
+    \item Dados armazenados na memória;
+    \item Comandos atômicos;
+    \item Single-threaded;
+    \item Modelo cliente-servidor (TCP);
+    \item Alta performance para gravação e/ou leitura de dados 
+    \item Interação através de comandos, não há linguagem de consulta semelhante ao SQL;
+\end{itemize}
+\begin{textblock*}{5cm}(7cm,2cm) % {block width} (coords)
+    \includegraphics[scale=0.4]{redis.png}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Exemplo Redis}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.7]{r1.png}
+        \caption{Comandos básicos do Redis}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo Redis}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.7]{r2.png}
+        \caption{Um valor de Redis pode ser configurado para expirar}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo Redis}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.7]{r3.png}
+        \caption{Listas do Redis}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{Aplicações do Redis}
+\begin{itemize}
+    \item Aplicações Web e móveis;
+    \item Jogos;
+    \item Tecnologia de anúncios;
+    \item IOT;
+\end{itemize} 
+Empresas que usam Redis:
+\begin{itemize}
+    \item Twitter;
+    \item GitHub;
+    \item Pinterest;
+    \item Snapchat;
+    \item StackOverflow;
+    \item Flickr;
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Documento}
+\begin{itemize}
+    \item Armazena os dados semiestruturados como documentos;
+    \item Intuitivo para desenvolvedores por se assimilar ao JSON/XML;
+    \item Cada documento é autodescritível;
+    \item Os documentos são agrupados em “conjuntos”;
+    \item Identificadores únicos universais (UUID);
+    \item Possibilita a consulta de documentos através de métodos avançados de agrupamento e filtragem (MapReduce);
+\end{itemize}
+\begin{textblock*}{5cm}(10cm,6.5cm) % {block width} (coords)
+    \includegraphics[scale=0.55]{doc.png}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}
+\frametitle{MongoDB}
+\begin{itemize}
+    \item Escrito na linguagem C++;
+    \item Open-source (Licença GNU AGPL 3.0);
+    \item Armazena dados em documentos flexíveis semelhantes a JSON.
+    \item O modelo de documento é mapeado para os objetos no código do seu aplicativo , facilitando o trabalho com os dados;
+    \item Distribuído em seu núcleo, de modo que a alta disponibilidade, o dimensionamento horizontal e a distribuição geográfica são integrados;
+    \end{itemize}
+\begin{textblock*}{5cm}(6cm,1.5cm) % {block width} (coords)
+    \includegraphics[scale=0.45]{mongo1.png}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Exemplo MongoDB}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.7]{m1.png}
+        \caption{Inserindo os dados}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo MongoDB}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.7]{m3.png}
+        \caption{Salvando os dados}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo MongoDB}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.7]{m4.png}
+        \caption{Conteúdo de MeusDados}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo MongoDB}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.55]{m5.png}
+        \caption{Conteúdo de MeusDados em outra armazenagem}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo MongoDB}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.7]{m7.png}
+        \caption{Removendo dados}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo MongoDB}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.6]{m8.png}
+        \caption{Atualizando dados}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo MongoDB}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.7]{m9.png}
+        \caption{Consultando dados}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Aplicações do MongoDB}
+\begin{itemize}
+    \item Aplicativos de gerenciamento de conteúdo, como blogs e plataformas de vídeo;
+    \item Armazenamento de informações de catálogo, por exemplo: Comércio eletrônico;
+    \item Aplicações em que precisa-se gerencia diversos atributos sem afetar outros;
+\end{itemize}
+Empresas que usam MongoDB:
+\begin{itemize}
+    \item Globo.com;
+    \item SourceForge;
+    \item FourSquare;
+    \item MailBox(e-mail do Dropbox);
+    \item LinkedIn;
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Orientado à Coluna}
+\begin{itemize}
+    \item Criado para trabalhar com grande quantidade de dados;
+    \item Trabalha apenas com colunas, cada coluna é um arquivo diferente no disco;
+    \item Buscar por dados é muito mais rápido quando se tem uma grande quantidade de colunas na tabela;
+    \item Compressão de dados maior do que em linha;
+    \item Busca é feita antes da criação das tuplas;
+\end{itemize}
+\begin{textblock*}{5cm}(9.5cm,6.4cm) % {block width} (coords)
+    \includegraphics[scale=0.06]{coluna.png}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Linha vs. Coluna}
+\begin{textblock*}{5cm}(0.5cm,1.5cm) % {block width} (coords)
+    \includegraphics[scale=0.6]{linhavscoluna1.jpg}
+\end{textblock*}
+\begin{textblock*}{5cm}(6cm,5.5cm) % {block width} (coords)
+    \includegraphics[scale=0.6]{linhavscoluna2.png}
+\end{textblock*}    
+\end{frame}
+
+\begin{frame}
+\frametitle{Cassandra}
+\begin{itemize}
+    \item Inicialmente criado no facebook e hoje é mantido pela Apache;
+    \item Velocidade de gravação de até 360MB/s, mais rápido que as buscas;
+    \item Armazenamento distribuído por hash em nós;
+    \item Nós são replicados;
+    \item Linguagem: CQL (Cassandra Query Language)
+\end{itemize}
+\begin{textblock*}{5cm}(8cm,5.5cm) % {block width} (coords)
+    \includegraphics[scale=0.06]{cassandra.png}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Arquitetura do Cassandra}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.6]{grafo.png}
+\end{figure} 
+\end{frame}
+
+\begin{frame}{Exemplo Cassandra}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.7]{c1.png}
+        \caption{Comando CREATE TABLE}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo Cassandra}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.55]{c2.png}
+        \caption{Comando INSERT}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo Cassandra}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.52]{c3.png}
+        \caption{Comando SELECT}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo Cassandra}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.50]{c4.png}
+        \caption{SELECT sem chave na cláusula WHERE}
+    \end{figure}
+\end{frame}
+
+
+
+\begin{frame}{Aplicações do Cassandra}
+\begin{itemize}
+    \item Catálogo de produtos;
+    \item Redes sociais; 
+    \item Detecção de fraudes;
+    \item Aplicações analíticas;
+\end{itemize}
+Empresas que usam Cassandra:
+\begin{itemize}
+    \item Amazon;
+    \item eBay;
+    \item Netflix;
+    \item Facebook;
+    \item Microsoft;
+    \item Instagram;
+    \item NASA;
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Grafo}
+\begin{itemize}
+\item Motivado pela grande quantidade de dados sendo geradas diariamente (Big Data);
+\item Expressa de forma explícita os relacionamentos através de:
+    \begin{itemize}
+        \item Relacionamentos = arestas;
+        \item Entidades = Vértices;
+    \end{itemize}
+\item Modelagem mais simples, linguagem mais natural;
+\item Usado para consultas complexas;
+\item Relacionamentos podem possuir dados;
+\end{itemize}
+\begin{textblock*}{5cm}(8.7cm,5.7cm) % {block width} (coords)
+    \includegraphics[scale=0.5]{grafoex.png}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Exemplo Twitter}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.65]{ex.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Neo4J}
+\begin{itemize}
+\item Desenvolvido em Java;
+\item Banco de dados em grafo mais popular; 
+\item Open Source;
+\item Linguagem: Cypher
+\end{itemize}
+\begin{textblock*}{5cm}(8cm,5.7cm) % {block width} (coords)
+    \includegraphics[scale=0.08]{neo4j.png}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Exemplo Neo4J}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.29]{g1.jpg}
+        \caption{Criação de bandas e fãs (Cypher)}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo Neo4J}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.16]{g2.jpg}
+        \caption{Grafo}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo Neo4J}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.27]{g3.jpg}
+        \caption{Criação dos relacionamentos entre fãs e bandas (Cypher)}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo Neo4J}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.15]{g4.jpg}
+        \caption{Grafo}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo Neo4J}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.15]{g5.jpg}
+        \caption{Quais são as bandas que Eder curte? (Cypher)}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Exemplo Neo4J}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.16]{g6.jpg}
+        \caption{Grafo}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Aplicações do Neo4J}
+\begin{itemize}
+    \item Detecção de fraude e solução de análise;
+    \item Ferramenta de recomendação e recomendação de produto;
+    \item Mídias sociais e Redes Sociais
+    \item Inteligência artificial e Machine Learning;
+\end{itemize}
+Empresas que usam Neo4J:
+\begin{itemize}
+    \item eBay;
+    \item Walmart;
+    \item Medium
+    \item Linkedin;
+    \item Gamesys;
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Comparativo dos Principais SGBD's NoSQL}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.36]{grafic.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Conclusão}
+Com o grande crescimento do volume de dados em determinadas organizações, os bancos de dados NoSQL tem se tornado uma grande alternativa quando nos referimos a escalabilidade e disponibilidade, fatores estes que se tornam imprescindíveis em algumas aplicações Web.
+\end{frame}
+
+
+\begin{frame}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.14]{duvidas.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Referências Bibliográficas}
+\begin{itemize}
+\item https://imasters.com.br/banco-de-dados/introducao-ao-redis-o-nosql-chave-valor-mais-famoso
+\item http://desenvolvedor.ninja/redis-o-que-e-e-para-que-serve/
+\item https://aws.amazon.com/pt/elasticache/what-is-redis/
+\item http://blog.clubedocodigo.com.br/crie-aplicacoes-mais-rapidas-utilizando-redis/
+\item https://diogobemfica.com.br/comecando-com-o-redis/
+\item https://www.ibm.com/developerworks/br/library/j-javadev2-22/index.html
+\item https://aws.amazon.com/pt/nosql/document/
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Referências Bibliográficas}
+\begin{itemize}
+\item https://www.devmedia.com.br/introducao-ao-mongodb/30792
+\item https://www.mongodb.com/what-is-mongodb
+\item https://www.devmedia.com.br/banco-de-dados-nosql-um-novo-paradigma-revista-sql-magazine-102/25918
+\item https://aws.amazon.com/pt/nosql/columnar/
+\item https://www.slideshare.net/gilesaugusto/nosql-familia-de-colunas-monografia
+\item https://www.devmedia.com.br/introducao-ao-cassandra/38377
+\item https://www.infoq.com/br/presentations/neo4j-visao-pratica
+\item https://imasters.com.br/banco-de-dados/graphdb-series-o-que-e-um-banco-de-dados-de-grafos
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Referências Bibliográficas}
+\begin{itemize}
+\item https://www.slideshare.net/MayogaX/banco-de-dados-de-grafos
+\item https://neo4j.com/use-cases/
+\item https://www.devmedia.com.br/introducao-aos-bancos-de-dados-nosql/26044
+\item https://dicasdeprogramacao.com.br/6-motivos-para-usar-bancos-de-dados-nosql/
+\item http://www.cienciaedados.com/top-6-nosql-databases/
+\item https://imasters.com.br/banco-de-dados/o-top-5-das-plataformas-nosql-no-mercado-atual
+\item https://aws.amazon.com/pt/nosql/key-value/
+\item https://db-engines.com/en/ranking
+\item https://www.devmedia.com.br/introducao-ao-mongodb/30792
+\item https://www.couchbase.com/resources/why-nosql
+\end{itemize}
+\end{frame}
+
+\end{document}
